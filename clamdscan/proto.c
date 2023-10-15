@@ -51,6 +51,9 @@
 #include <sys/un.h>
 #include <netdb.h>
 #endif
+#ifdef __OS2__
+#include <libcx/net.h>
+#endif
 
 // libclamav
 #include "clamav.h"
