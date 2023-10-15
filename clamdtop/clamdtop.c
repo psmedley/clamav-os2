@@ -57,6 +57,9 @@
 #include <sys/un.h>
 #include <sys/time.h>
 #endif
+#ifdef __OS2__
+#include <libcx/net.h>
+#endif
 #include <assert.h>
 #include <errno.h>
 
@@ -663,7 +666,11 @@ static int make_connection_real(const char *soname, conn_t *conn)
     conn->tcp = 0;
 
 #ifndef _WIN32
+#ifdef C_OS2
+    if(cli_is_abspath(soname)) {
+#else
     if (cli_is_abspath(soname) || (access(soname, F_OK) == 0)) {
+#endif
         struct sockaddr_un addr;
 
         s = socket(AF_UNIX, SOCK_STREAM, 0);
@@ -676,6 +683,10 @@ static int make_connection_real(const char *soname, conn_t *conn)
         memset(&addr, 0, sizeof(addr));
         addr.sun_family = AF_UNIX;
         strncpy(addr.sun_path, soname, sizeof(addr.sun_path));
+#ifdef C_OS2
+        if (strncmp(addr.sun_path,"\\socket\\",8))
+            sprintf(addr.sun_path,"\\socket\\%s",soname);
+#endif
         addr.sun_path[sizeof(addr.sun_path) - 1] = 0x0;
 
         print_con_info(conn, "Connecting to: %s\n", soname);

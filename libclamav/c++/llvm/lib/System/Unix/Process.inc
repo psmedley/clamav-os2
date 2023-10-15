@@ -213,12 +213,22 @@ static unsigned getColumns(int FileID) {
 
   unsigned Columns = 0;
 
+#ifdef __KLIBC__
+	{
+	    int screendata[2];
+	    _scrsize(screendata);
+	    Columns = screendata[0];
+	}
+#else
+
 #if defined(HAVE_SYS_IOCTL_H) && defined(HAVE_TERMIOS_H)
   // Try to determine the width of the terminal.
   struct winsize ws;
   if (ioctl(FileID, TIOCGWINSZ, &ws) == 0)
     Columns = ws.ws_col;
 #endif
+
+#endif // __KLIBC__
 
   return Columns;
 }

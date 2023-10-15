@@ -50,12 +50,22 @@ dnsquery(const char *domain, int qtype, unsigned int *ttl)
     int len, type;
     unsigned int cttl, size, txtlen = 0;
 
+#ifdef __KLIBC__
+	static int res_init_done = 0;
+#endif
+
     if (ttl)
         *ttl = 0;
+#ifdef __KLIBC__
+    if (res_init_done == 0)
+#endif
     if (res_init() < 0) {
         logg("^res_init failed\n");
         return NULL;
     }
+#ifdef __KLIBC__
+    res_init_done = 1; // call only once per session
+#endif
 
     logg("*Querying %s\n", domain);
 

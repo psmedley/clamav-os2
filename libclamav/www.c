@@ -37,6 +37,10 @@
 
 #include <errno.h>
 
+#ifdef __OS2__
+#include <libcx/net.h>
+#endif
+
 #if !defined(_WIN32)
 #include <sys/socket.h>
 #if HAVE_SYS_SELECT_H
@@ -71,6 +75,7 @@ int connect_host(const char *host, const char *port, uint32_t timeout, int useAs
     if (iResult != 0)
         return -1;
 #endif
+
 
     memset(&hints, 0x00, sizeof(struct addrinfo));
     hints.ai_family   = AF_UNSPEC;

@@ -1494,12 +1494,24 @@ int recvloop(int *socketds, unsigned nsockets, struct cl_engine *engine, unsigne
     event_wake_accept = CreateEvent(NULL, TRUE, FALSE, NULL);
     event_wake_recv   = CreateEvent(NULL, TRUE, FALSE, NULL);
 #else
+
+#ifdef __KLIBC__
+    // YD libc select() does not work with pipes
+    if (socketpair(AF_UNIX, SOCK_STREAM,0, acceptdata.syncpipe_wake_recv) == -1 ||
+	(socketpair(AF_UNIX, SOCK_STREAM,0, acceptdata.syncpipe_wake_accept) == -1)) {
+
+	logg("!pipe failed\n");
+	exit(-1);
+    }
+#else
     if (pipe(acceptdata.syncpipe_wake_recv) == -1 ||
         (pipe(acceptdata.syncpipe_wake_accept) == -1)) {
 
         logg("!pipe failed\n");
         exit(-1);
     }
+#endif
+
     syncpipe_wake_recv_w = acceptdata.syncpipe_wake_recv[1];
 
     if (fds_add(fds, acceptdata.syncpipe_wake_recv[0], 1, 0) == -1 ||

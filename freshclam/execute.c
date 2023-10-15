@@ -33,6 +33,11 @@
 #include "optparser.h"
 #include "execute.h"
 
+#if defined(C_OS2)
+#include <process.h>
+#define _P_NOWAIT P_NOWAIT
+#endif
+
 #define MAX_CHILDREN 5
 
 int g_active_children;
@@ -52,7 +57,7 @@ void execute(const char *type, const char *text, int bDaemonized)
         return;
     }
 
-#ifdef _WIN32
+#if defined(_WIN32) || defined(C_OS2)
     if (system(text) == -1) {
         logg("^%s: couldn't execute \"%s\".\n", type, text);
         return;

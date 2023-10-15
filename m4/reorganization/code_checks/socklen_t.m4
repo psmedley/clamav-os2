@@ -4,6 +4,9 @@ AC_CACHE_VAL([ac_cv_socklen_t],
 [
     ac_cv_socklen_t=no
     AC_TRY_COMPILE([
+	#ifdef __OS2__
+	typedef int socklen_t;
+	#endif
 	#include <sys/types.h>
         #include <sys/socket.h>
     ],

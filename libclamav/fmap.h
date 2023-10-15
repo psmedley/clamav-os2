@@ -86,6 +86,9 @@ struct cl_fmap {
 #endif
     bool have_maphash;
     unsigned char maphash[16];
+#ifdef C_OS2__
+    void *data;
+#endif
     uint64_t *bitmap;
     char *name;
 };

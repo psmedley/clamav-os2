@@ -60,6 +60,11 @@
 #include <mach-o/dyld.h>
 #endif
 
+#ifdef __KLIBC__
+#define INCL_DOS
+#include <os2.h>
+#endif
+
 // Put in a hack for Cygwin which falsely reports that the mkdtemp function
 // is available when it is not.
 #ifdef __CYGWIN__
@@ -350,6 +355,13 @@ Path Path::GetMainExecutable(const char *argv0, void *MainAddr) {
     if (realpath(exe_path, link_path))
       return Path(std::string(link_path));
   }
+#elif defined(__KLIBC__)
+    static CHAR	Buff[2*_MAX_PATH];
+    PPIB	pib;
+    // get executable fullpath
+    DosGetInfoBlocks( NULL, &pib);
+    DosQueryModuleName( pib->pib_hmte, sizeof(Buff), Buff);
+    return Path(std::string(Buff));
 #elif defined(__FreeBSD__) || defined (__NetBSD__) || defined(__minix)
   char exe_path[PATH_MAX];
 

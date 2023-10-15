@@ -30,6 +30,7 @@ if ENABLE_UNRAR
 AM_CPPFLAGS += -DWARN_DLOPEN_FAIL
 libclamunrar_la_CXXFLAGS = $(AM_CPPFLAGS) -DRARDLL -Wno-logical-op-parentheses -Wno-switch -Wno-dangling-else
 libclamunrar_la_LDFLAGS = @TH_SAFE@ -version-info @LIBCLAMAV_VERSION@ -no-undefined
+libclamunrar_la_LDFLAGS += -shortname clamur
 
 if VERSIONSCRIPT
 libclamunrar_la_LDFLAGS += -Wl,@VERSIONSCRIPTFLAG@,@top_srcdir@/libclamunrar/libclamunrar.map
@@ -91,7 +92,8 @@ EXTRA_DIST += @top_srcdir@/libclamunrar/libclamunrar.map
 
 libclamunrar_iface_la_CXXFLAGS = $(AM_CPPFLAGS) -I@top_srcdir@/libclamunrar
 libclamunrar_iface_la_LIBADD = libclamunrar.la
-libclamunrar_iface_la_LDFLAGS = -module @TH_SAFE@ -version-info @LIBCLAMAV_VERSION@ -no-undefined
+libclamunrar_iface_la_LDFLAGS = @TH_SAFE@ -version-info @LIBCLAMAV_VERSION@ -no-undefined
+libclamunrar_iface_la_LDFLAGS += -shortname clamuri
 
 if VERSIONSCRIPT
 libclamunrar_iface_la_LDFLAGS += -Wl,@VERSIONSCRIPTFLAG@,@top_srcdir@/libclamunrar_iface/libclamunrar_iface.map
@@ -104,7 +106,7 @@ libclamunrar_iface_la_SOURCES = \
 lib_LTLIBRARIES += libclamunrar_iface.la
 EXTRA_DIST += @top_srcdir@/libclamunrar_iface/libclamunrar_iface.map
 
-IFACELIBADD = -dlopen libclamunrar_iface.la
+IFACELIBADD = libclamunrar_iface.la
 IFACEDEP = libclamunrar_iface.la
 endif
 

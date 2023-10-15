@@ -68,6 +68,11 @@
 #include "clamav-types.h"
 #include "clamav-version.h"
 
+#ifdef __KLIBC__x
+#include "network.h"
+#include "getaddrinfo.h"
+#endif
+
 #ifdef __cplusplus
 extern "C" {
 #endif

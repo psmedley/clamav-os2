@@ -67,6 +67,10 @@ static void conn_setup_mayfail(int may)
     memset((void *)&nixsock, 0, sizeof(nixsock));
     nixsock.sun_family = AF_UNIX;
     strncpy(nixsock.sun_path, SOCKET, sizeof(nixsock.sun_path));
+#ifdef C_OS2
+    if (strncmp(nixsock.sun_path,"\\socket\\",8))
+	sprintf(nixsock.sun_path,"\\socket\\%s",SOCKET);
+#endif
 
     sockd = socket(AF_UNIX, SOCK_STREAM, 0);
     if (sockd == -1 && (may && (errno == EMFILE || errno == ENFILE)))
@@ -399,6 +403,7 @@ END_TEST
 
 static int sendmsg_fd(int sockd, const char *mesg, size_t msg_len, int fd, int singlemsg)
 {
+#ifndef __KLIBC__
     struct msghdr msg;
     struct cmsghdr *cmsg;
     unsigned char fdbuf[CMSG_SPACE(sizeof(int))];
@@ -439,6 +444,7 @@ static int sendmsg_fd(int sockd, const char *mesg, size_t msg_len, int fd, int s
     }
 
     return sendmsg(sockd, &msg, 0);
+#endif // __KLIBC__
 }
 
 static void tst_fildes(const char *cmd, size_t len, int fd,

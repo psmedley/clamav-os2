@@ -441,7 +441,7 @@ int match_regex(const char *filename, const char *pattern)
     regex_t reg;
     int match, flags = REG_EXTENDED | REG_NOSUB;
     char fname[513];
-#ifdef _WIN32
+#if defined(_WIN32) || defined(C_OS2)
     flags |= REG_ICASE; /* case insensitive on Windows */
 #endif
     if (cli_regcomp(&reg, pattern, flags) != 0)
@@ -462,9 +462,13 @@ int match_regex(const char *filename, const char *pattern)
 
 int cli_is_abspath(const char *path)
 {
-#ifdef _WIN32
+#if defined(_WIN32) || defined(C_OS2)
     int len = strlen(path);
-    return (len > 2 && path[0] == '\\' && path[1] == '\\') || (len >= 2 && ((*path >= 'a' && *path <= 'z') || (*path >= 'A' && *path <= 'Z')) && path[1] == ':');
+    return (len > 2 && path[0] == '\\' && path[1] == '\\') 
+#ifdef C_OS2
+	|| *path == '/' || *path == '\\'
+#endif
+	|| (len >= 2 && ((*path >= 'a' && *path <= 'z') || (*path >= 'A' && *path <= 'Z')) && path[1] == ':');
 #else
     return *path == '/';
 #endif

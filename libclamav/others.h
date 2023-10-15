@@ -40,6 +40,10 @@
 #include <stdlib.h>
 #include <stdbool.h>
 
+#ifdef __KLIBC__
+#include <unistd.h>
+#endif
+
 #ifdef HAVE_JSON
 #include <json.h>
 #endif
@@ -522,11 +526,13 @@ struct cl_settings {
     uint64_t pcre_max_filesize;
 };
 
+#ifndef __KLIBC__
 extern cl_unrar_error_t (*cli_unrar_open)(const char *filename, void **hArchive, char **comment, uint32_t *comment_size, uint8_t debug_flag);
 extern cl_unrar_error_t (*cli_unrar_peek_file_header)(void *hArchive, unrar_metadata_t *file_metadata);
 extern cl_unrar_error_t (*cli_unrar_extract_file)(void *hArchive, const char *destPath, char *outputBuffer);
 extern cl_unrar_error_t (*cli_unrar_skip_file)(void *hArchive);
 extern void (*cli_unrar_close)(void *hArchive);
+#endif
 
 extern LIBCLAMAV_EXPORT int have_rar;
 

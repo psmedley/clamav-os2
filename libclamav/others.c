@@ -84,11 +84,13 @@
 #include "stats.h"
 #include "json_api.h"
 
+#ifndef C_OS2x
 cl_unrar_error_t (*cli_unrar_open)(const char *filename, void **hArchive, char **comment, uint32_t *comment_size, uint8_t debug_flag);
 cl_unrar_error_t (*cli_unrar_peek_file_header)(void *hArchive, unrar_metadata_t *file_metadata);
 cl_unrar_error_t (*cli_unrar_extract_file)(void *hArchive, const char *destPath, char *outputBuffer);
 cl_unrar_error_t (*cli_unrar_skip_file)(void *hArchive);
 void (*cli_unrar_close)(void *hArchive);
+#endif
 
 int have_rar             = 0;
 static int is_rar_inited = 0;
@@ -317,6 +319,7 @@ static void rarload(void)
 
     if (have_rar) return;
 
+#ifndef C_OS2x
     rhandle = load_module("libclamunrar_iface", "unrar");
     if (NULL == rhandle)
         return;
@@ -332,6 +335,8 @@ static void rarload(void)
         cli_warnmsg("UnRAR support unavailable\n");
         return;
     }
+#endif // C_OS2
+
     have_rar = 1;
 }
 
@@ -1282,7 +1287,7 @@ char *cli_hashfile(const char *filename, int type)
 int cli_unlink(const char *pathname)
 {
     if (unlink(pathname) == -1) {
-#ifdef _WIN32
+#if defined(_WIN32) || defined(C_OS2x)
         /* Windows may fail to unlink a file if it is marked read-only,
 		 * even if the user has permissions to delete the file. */
         if (-1 == _chmod(pathname, _S_IWRITE)) {
@@ -1548,7 +1553,7 @@ size_t cli_recursion_stack_get_size(cli_ctx *ctx, int index)
     return ctx->recursion_stack[index_ignoring_normalized_layers].size;
 }
 
-#ifdef C_WINDOWS
+#if defined(C_WINDOWS) || defined(C_OS2)
 /*
  * Windows doesn't allow you to delete a directory while it is still open
  */

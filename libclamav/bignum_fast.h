@@ -11,6 +11,7 @@
 /* Oct 1, 2013
  * Adding clamav-config.h include here for size-checking on fall-through case
  */
+#include <sys/param.h>
 #if HAVE_CONFIG_H
 #include "clamav-config.h"
 #endif
@@ -30,12 +31,14 @@
 #include <ctype.h>
 #include <limits.h>
 
+#ifndef __KLIBC__
 #ifndef MIN
 #define MIN(x, y) ((x) < (y) ? (x) : (y))
 #endif
 
 #ifndef MAX
 #define MAX(x, y) ((x) > (y) ? (x) : (y))
+#endif
 #endif
 
 /* externally define this symbol to ignore the default settings, useful for changing the build from the make process */

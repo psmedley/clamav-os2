@@ -66,6 +66,10 @@
 #endif /* HAVE_POLL_H */
 #endif /* HAVE_POLL */
 
+#ifdef __OS2__
+#define vfork fork
+#endif
+
 #include <limits.h>
 
 // libclamav

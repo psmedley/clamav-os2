@@ -75,7 +75,9 @@
 
 #include <sys/types.h>
 #include <sys/stat.h>
+#ifndef __OS2__
 #include <dos.h>
+#endif
 
 #if !defined(_EMX) && !defined(_MSC_VER)
   #include <dir.h>
@@ -99,7 +101,9 @@
 #include <string.h>
 #include <ctype.h>
 #include <fcntl.h>
+#ifndef __OS2__
 #include <dos.h>
+#endif
 #include <io.h>
 #include <time.h>
 #include <signal.h>

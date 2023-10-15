@@ -1009,7 +1009,7 @@ struct optstruct *optparse(const char *cfgfile, int argc, char **argv, int verbo
             for (i = 0; i < (int)strlen(pt) - 1 && (pt[i] == ' ' || pt[i] == '\t'); i++)
                 ;
             pt += i;
-            for (i = strlen(pt); i >= 1 && (pt[i - 1] == ' ' || pt[i - 1] == '\t' || pt[i - 1] == '\n'); i--)
+	    for (i = strlen(pt); i >= 1 && (pt[i - 1] == ' ' || pt[i - 1] == '\t' || pt[i - 1] == '\n' || pt[i - 1] == '\r'); i--);
                 ;
             if (!i) {
                 if (verbose)

@@ -47,7 +47,7 @@
 #endif
 
 /* BSD and HP-UX need a bigger stacksize than the system default */
-#if defined(C_BSD) || defined(C_HPUX) || defined(C_AIX) || (defined(C_LINUX) && !defined(__GLIBC__))
+#if defined(C_BSD) || defined(C_HPUX) || defined(C_AIX) || (defined(C_LINUX) && !defined(__GLIBC__)) || defined(C_OS2)
 #define C_BIGSTACK 1
 #endif
 

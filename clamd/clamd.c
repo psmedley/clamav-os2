@@ -738,11 +738,13 @@ int main(int argc, char **argv)
                 sock_mode = 0777 /* & ~umsk*/; /* conservative default: umask was 0 in clamd < 0.96 */
             }
 
+#ifndef C_OS2
             if (chmod(optget(opts, "LocalSocket")->strarg, sock_mode & 0666)) {
                 logg("!Cannot set socket permission to %s\n", optget(opts, "LocalSocketMode")->strarg);
                 ret = 1;
                 break;
             }
+#endif
 
             nlsockets++;
         }
@@ -804,7 +806,7 @@ int main(int argc, char **argv)
         for (i = 0; i < nlsockets; i++) {
             closesocket(lsockets[i]);
         }
-#ifndef _WIN32
+#if !defined(_WIN32) && !defined(C_OS2)
         if (nlsockets && localsock) {
             opt = optget(opts, "LocalSocket");
 

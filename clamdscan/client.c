@@ -49,6 +49,10 @@
 #include <dirent.h>
 #include <fcntl.h>
 
+#ifdef __OS2__
+#include <libcx/net.h>
+#endif
+
 #ifdef HAVE_SYS_UIO_H
 #include <sys/uio.h>
 #endif
@@ -92,6 +96,10 @@ static int isremote(const struct optstruct *opts)
         nixsock.sun_family = AF_UNIX;
         strncpy(nixsock.sun_path, opt->strarg, sizeof(nixsock.sun_path));
         nixsock.sun_path[sizeof(nixsock.sun_path) - 1] = '\0';
+#ifdef C_OS2
+	if (strncmp(nixsock.sun_path,"\\socket\\",8))
+	    sprintf(nixsock.sun_path,"\\socket\\%s",opt->strarg);
+#endif
         return 0;
     }
 #endif
@@ -127,9 +135,11 @@ static int isremote(const struct optstruct *opts)
                 case AF_INET:
                     ((struct sockaddr_in *)(p->ai_addr))->sin_port = htons(INADDR_ANY);
                     break;
+#ifndef C_OS2
                 case AF_INET6:
                     ((struct sockaddr_in6 *)(p->ai_addr))->sin6_port = htons(INADDR_ANY);
                     break;
+#endif
                 default:
                     break;
             }
@@ -288,7 +298,7 @@ static char *makeabs(const char *basepath)
             free(ret);
             return NULL;
         }
-#ifdef _WIN32
+#if defined(_WIN32) || defined(C_OS2)
         if (*basepath == '\\') {
             namelen = 2;
             basepath++;

@@ -4832,6 +4832,11 @@ const char *cl_retdbdir(void)
 #endif
 }
 
+const char *cl_retcfgdir(void)
+{
+    return CONFDIR;
+}
+
 cl_error_t cl_statinidir(const char *dirname, struct cl_stat *dbstat)
 {
     DIR *dd;

@@ -388,6 +388,9 @@ extern cl_fmap_t *cl_fmap_open_handle(void *handle, size_t offset, size_t len,
 #ifndef ANONYMOUS_MAP
     use_aging = 0;
 #endif
+#ifdef C_OS2
+    use_aging = 0;
+#endif
 #ifdef ANONYMOUS_MAP
     if (use_aging) {
         fmap_lock;

@@ -781,6 +781,7 @@ static fc_error_t initialize(struct optstruct *opts)
     }
 
 #ifdef HAVE_PWD_H
+#if !defined(C_OS2)
     /* Drop database privileges here if we are not planning on daemonizing.  If
      * we are, we should wait until after we craete the PidFile to drop
      * privileges.  That way, it is owned by root (or whoever started freshclam),
@@ -798,6 +799,7 @@ static fc_error_t initialize(struct optstruct *opts)
             goto done;
         }
     }
+#endif /* C_OS2 */
 #endif /* HAVE_PWD_H */
 
     /*
@@ -898,11 +900,13 @@ static fc_error_t initialize(struct optstruct *opts)
             status = FC_ECONFIG;
             goto done;
         }
+#ifndef C_OS2
         if (statbuf.st_mode & (S_IRGRP | S_IWGRP | S_IXGRP | S_IROTH | S_IWOTH | S_IXOTH)) {
             logg("^Insecure permissions (for HTTPProxyPassword): %s must have no more than 0700 permissions.\n", cfgfile);
             status = FC_ECONFIG;
             goto done;
         }
+#endif
     }
 #endif
 

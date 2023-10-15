@@ -98,6 +98,10 @@ int localserver(const struct optstruct *opts)
     server.sun_family = AF_UNIX;
     strncpy(server.sun_path, optget(opts, "LocalSocket")->strarg, sizeof(server.sun_path));
     server.sun_path[sizeof(server.sun_path) - 1] = '\0';
+#ifdef C_OS2
+    if (strncmp(server.sun_path,"\\socket\\",8))
+	sprintf(server.sun_path,"\\socket\\%s",optget(opts, "LocalSocket")->strarg);
+#endif
 
     pos = NULL;
     if ((pos = strstr(server.sun_path, "/")) && (pos = strstr(((char *)pos + 1), "/"))) {

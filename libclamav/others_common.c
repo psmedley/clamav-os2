@@ -174,7 +174,7 @@ int cli_matchregex(const char *str, const char *regex)
 {
     regex_t reg;
     int match, flags = REG_EXTENDED | REG_NOSUB;
-#ifdef _WIN32
+#if defined(_WIN32) || defined(C_OS2)
     flags |= REG_ICASE;
 #endif
     if (cli_regcomp(&reg, regex, flags) == 0) {
@@ -235,6 +235,7 @@ void *cli_realloc(void *ptr, size_t size)
     alloc = realloc(ptr, size);
 
     if (!alloc) {
+logg("cli_realloc(): Can't re-allocate memory to %lu bytes.\n", (unsigned long int)size);
         perror("realloc_problem");
         cli_errmsg("cli_realloc(): Can't re-allocate memory to %lu bytes.\n", (unsigned long int)size);
         return NULL;
@@ -254,6 +255,7 @@ void *cli_realloc2(void *ptr, size_t size)
     alloc = realloc(ptr, size);
 
     if (!alloc) {
+logg("cli_realloc2(): Can't re-allocate memory to %lu bytes.\n", (unsigned long int)size);
         perror("realloc_problem");
         cli_errmsg("cli_realloc2(): Can't re-allocate memory to %lu bytes.\n", (unsigned long int)size);
         if (ptr)
@@ -469,7 +471,7 @@ const char *cli_gettmpdir(void)
     const char *tmpdir;
     unsigned int i;
 
-#ifdef _WIN32
+#if defined(_WIN32) || defined(C_OS2)
     char *envs[] = {"TEMP", "TMP", NULL};
 #else
     char *envs[] = {"TMPDIR", NULL};

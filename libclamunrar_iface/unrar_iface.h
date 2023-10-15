@@ -40,10 +40,17 @@
 #include <sys/types.h>
 
 #define unrar_open libclamunrar_iface_LTX_unrar_open
+#ifdef __KLIBC__x
+#define unrar_open cli_unrar_open
+#define unrar_extract_next_prepare cli_unrar_extract_next_prepare
+#define unrar_extract_next cli_unrar_extract_next
+#define unrar_close cli_unrar_close
+#else
 #define unrar_peek_file_header libclamunrar_iface_LTX_unrar_peek_file_header
 #define unrar_extract_file libclamunrar_iface_LTX_unrar_extract_file
 #define unrar_skip_file libclamunrar_iface_LTX_unrar_skip_file
 #define unrar_close libclamunrar_iface_LTX_unrar_close
+#endif
 
 typedef enum cl_unrar_error_tag {
     UNRAR_OK = 0,

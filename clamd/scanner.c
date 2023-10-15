@@ -157,7 +157,11 @@ cl_error_t scan_callback(STATBUF *sb, char *filename, const char *msg, enum cli_
 
     /* detect disconnected socket,
      * this should NOT detect half-shutdown sockets (SHUT_WR) */
-    if (send(scandata->conn->sd, &ret, 0, 0) == -1 && errno != EINTR) {
+    if (send(scandata->conn->sd, &ret, 0, 0) == -1 && errno != EINTR
+#ifdef C_OS2
+	 && errno != EFAULT // YD length==0 may fail on os2 sockets
+#endif
+		) {
         logg("$Client disconnected while command was active!\n");
         thrmgr_group_terminate(scandata->conn->group);
         if (reason == visit_file)
@@ -197,7 +201,7 @@ cl_error_t scan_callback(STATBUF *sb, char *filename, const char *msg, enum cli_
             free(filename);
             return CL_SUCCESS;
         case warning_skipped_special:
-            if (msg == scandata->toplevel_path)
+	    if (!strcmp(msg, scandata->toplevel_path))
                 conn_reply(scandata->conn, msg, "Not supported file type", "ERROR");
             logg("*Not supported file type: %s\n", msg);
             free(filename);
@@ -218,7 +222,7 @@ cl_error_t scan_callback(STATBUF *sb, char *filename, const char *msg, enum cli_
 #endif
 
     if (sb && sb->st_size == 0) { /* empty file */
-        if (msg == scandata->toplevel_path)
+	if (!strcmp(msg, scandata->toplevel_path))
             conn_reply_single(scandata->conn, filename, "Empty file");
         free(filename);
         return CL_SUCCESS;

@@ -41,6 +41,13 @@
 #endif
 #include <stddef.h>
 
+#if defined(C_OS2)
+#define INCL_DOS
+#define INCL_DOSERRORS
+#include <os2safe.h>
+#include <os2.h>
+#endif
+
 #include "clamav.h"
 #include "others.h"
 #include "str.h"
@@ -470,7 +477,10 @@ struct MP *mpool_create()
         cli_errmsg("fragsz[0] too small!\n");
         return NULL;
     }
-#ifndef _WIN32
+#if defined(C_OS2)
+  if(DosAllocMem(&mpool_p, sz, PAG_READ|PAG_WRITE|PAG_COMMIT|OBJ_ANY) != NO_ERROR)
+    if(DosAllocMem(&mpool_p, sz, PAG_READ|PAG_WRITE|PAG_COMMIT) != NO_ERROR)
+#elif !defined(_WIN32)
     if ((mpool_p = (struct MP *)mmap(NULL, sz, PROT_READ | PROT_WRITE, MAP_PRIVATE | ANONYMOUS_MAP, -1, 0)) == MAP_FAILED)
 #else
     if (!(mpool_p = (struct MP *)VirtualAlloc(NULL, sz, MEM_COMMIT | MEM_RESERVE, PAGE_READWRITE)))
@@ -496,7 +506,9 @@ void mpool_destroy(struct MP *mp)
 #ifdef CL_DEBUG
         memset(mpm, FREEPOISON, mpmsize);
 #endif
-#ifndef _WIN32
+#if defined(C_OS2)
+    DosFreeMem(mpm);
+#elif !defined(_WIN32)
         munmap((void *)mpm, mpmsize);
 #else
         VirtualFree(mpm, 0, MEM_RELEASE);
@@ -506,7 +518,9 @@ void mpool_destroy(struct MP *mp)
 #ifdef CL_DEBUG
     memset(mp, FREEPOISON, mpmsize + sizeof(*mp));
 #endif
-#ifndef _WIN32
+#if defined(C_OS2)
+    DosFreeMem(mpm);
+#elif !defined(_WIN32)
     munmap((void *)mp, mpmsize + sizeof(*mp));
 #else
     VirtualFree(mp, 0, MEM_RELEASE);
@@ -529,7 +543,9 @@ void mpool_flush(struct MP *mp)
 #ifdef CL_DEBUG
             memset((char *)mpm + mused, FREEPOISON, mpm->size - mused);
 #endif
-#ifndef _WIN32
+#if defined(C_OS2)
+	    DosSetMem(mpm + mused, mpm->size - mused, PAG_DECOMMIT);
+#elif !defined(_WIN32)
             munmap((char *)mpm + mused, mpm->size - mused);
 #else
             VirtualFree((char *)mpm + mused, mpm->size - mused, MEM_DECOMMIT);
@@ -544,7 +560,9 @@ void mpool_flush(struct MP *mp)
 #ifdef CL_DEBUG
         memset((char *)mp + mused, FREEPOISON, mp->u.mpm.size + sizeof(*mp) - mused);
 #endif
-#ifndef _WIN32
+#if defined(C_OS2)
+	DosSetMem(mp + mused, mp->u.mpm.size + sizeof(*mp) - mused, PAG_DECOMMIT);
+#elif !defined(_WIN32)
         munmap((char *)mp + mused, mp->u.mpm.size + sizeof(*mp) - mused);
 #else
         VirtualFree((char *)mp + mused, mp->u.mpm.size + sizeof(*mp) - mused, MEM_DECOMMIT);
@@ -668,7 +686,10 @@ void *mpool_malloc(struct MP *mp, size_t size)
     else
         i = align_to_pagesize(mp, MIN_FRAGSIZE);
 
-#ifndef _WIN32
+#if defined(C_OS2)
+  if(DosAllocMem(&mpm, i, PAG_READ|PAG_WRITE|PAG_COMMIT|OBJ_ANY) != NO_ERROR)
+    if(DosAllocMem(&mpm, i, PAG_READ|PAG_WRITE|PAG_COMMIT) != NO_ERROR) {
+#elif !defined(_WIN32)
     if ((mpm = (struct MPMAP *)mmap(NULL, i, PROT_READ | PROT_WRITE, MAP_PRIVATE | ANONYMOUS_MAP, -1, 0)) == MAP_FAILED) {
 #else
     if (!(mpm = (struct MPMAP *)VirtualAlloc(NULL, i, MEM_COMMIT | MEM_RESERVE, PAGE_READWRITE))) {

@@ -79,8 +79,10 @@ char *strptime(const char *s, const char *format, struct tm *tm);
 #define cli_strdup_to_utf8(x) strdup(x)
 #endif
 
+#ifndef __KLIBC__
 #ifndef O_BINARY
 #define O_BINARY 0
+#endif
 #endif
 
 #ifndef	FALSE
@@ -90,11 +92,13 @@ char *strptime(const char *s, const char *format, struct tm *tm);
 #define TRUE (1)
 #endif
 
+#ifndef __KLIBC__
 #ifndef MIN
 #define MIN(a, b)	(((a) < (b)) ? (a) : (b))
 #endif
 #ifndef MAX
 #define MAX(a,b)	(((a) > (b)) ? (a) : (b))
+#endif
 #endif
 
 #ifndef HAVE_IN_PORT_T
