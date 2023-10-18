@@ -1,0 +1,2 @@
+set LIBS=-lssl -lcrypto -lpthread -lcx -lat-funcs
+ash ./configure --prefix=/clamav --with-openssl=e:/usr --with-libcurl=e:/usr --with-xml=e:/usr --disable-unrar --disable-shared --enable-static 2>&1 | tee configure.log

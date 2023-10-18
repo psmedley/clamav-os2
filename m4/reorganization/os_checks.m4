@@ -103,6 +103,7 @@ os2*)
 	TH_SAFE="-thread-safe"
     fi
     AC_DEFINE([C_OS2],1,[os is OS/2])
+    AC_DEFINE([USE_MPOOL],1,[want mpool])
     ;;
 sco*)
     dnl njh@bandsman.sco.uk: SCO Unix port

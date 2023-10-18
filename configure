@@ -28326,6 +28326,7 @@ os2*)
     fi
 
 printf "%s\n" "#define C_OS2 1" >>confdefs.h
+printf "%s\n" "#define USE_MPOOL 1" >>confdefs.h
 
     ;;
 sco*)

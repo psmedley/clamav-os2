@@ -1,1 +1,30 @@
-# dummy
+getopt.lo: getopt.c ../clamav-config.h ../platform.h \
+ U:/usr/include/sys/types.h U:/usr/include/sys/cdefs.h \
+ U:/usr/include/sys/gnu/cdefs.h U:/usr/include/features.h \
+ U:/usr/include/machine/endian.h U:/usr/include/386/endian.h \
+ U:/usr/include/sys/_types.h U:/usr/include/machine/_types.h \
+ U:/usr/include/386/_types.h U:/usr/include/sys/select.h \
+ U:/usr/include/sys/_sigset.h U:/usr/include/stdlib.h \
+ U:/usr/include/sys/_null.h U:/usr/include/malloc.h \
+ U:/usr/include/stdio.h U:/usr/include/string.h U:/usr/include/strings.h \
+ getopt.h
+../clamav-config.h:
+../platform.h:
+U:/usr/include/sys/types.h:
+U:/usr/include/sys/cdefs.h:
+U:/usr/include/sys/gnu/cdefs.h:
+U:/usr/include/features.h:
+U:/usr/include/machine/endian.h:
+U:/usr/include/386/endian.h:
+U:/usr/include/sys/_types.h:
+U:/usr/include/machine/_types.h:
+U:/usr/include/386/_types.h:
+U:/usr/include/sys/select.h:
+U:/usr/include/sys/_sigset.h:
+U:/usr/include/stdlib.h:
+U:/usr/include/sys/_null.h:
+U:/usr/include/malloc.h:
+U:/usr/include/stdio.h:
+U:/usr/include/string.h:
+U:/usr/include/strings.h:
+getopt.h:

@@ -1,1 +1,253 @@
-# dummy
+cdiff.lo: cdiff.c ../clamav-config.h ../platform.h U:/usr/include/stdio.h \
+ U:/usr/include/sys/cdefs.h U:/usr/include/sys/gnu/cdefs.h \
+ U:/usr/include/features.h U:/usr/include/sys/_types.h \
+ U:/usr/include/machine/_types.h U:/usr/include/386/_types.h \
+ U:/usr/include/string.h U:/usr/include/strings.h U:/usr/include/ctype.h \
+ U:/usr/include/_ctype.h U:/usr/include/sys/types.h \
+ U:/usr/include/machine/endian.h U:/usr/include/386/endian.h \
+ U:/usr/include/sys/select.h U:/usr/include/sys/_sigset.h \
+ U:/usr/include/sys/stat.h U:/usr/include/sys/time.h \
+ U:/usr/include/sys/_timeval.h U:/usr/include/sys/timespec.h \
+ U:/usr/include/time.h U:/usr/include/unistd.h \
+ U:/usr/include/sys/unistd.h U:/usr/include/sys/_null.h \
+ ../libclamav/clamav.h e:/usr/include/openssl/ssl.h \
+ e:/usr/include/openssl/e_os2.h e:/usr/include/openssl/opensslconf.h \
+ e:/usr/include/openssl/opensslv.h U:/usr/include/inttypes.h \
+ U:/usr/include/machine/_inttypes.h U:/usr/include/386/_inttypes.h \
+ U:/usr/include/sys/stdint.h U:/usr/include/machine/_stdint.h \
+ U:/usr/include/386/_stdint.h U:/usr/include/machine/_limits.h \
+ U:/usr/include/386/_limits.h e:/usr/include/openssl/comp.h \
+ e:/usr/include/openssl/crypto.h U:/usr/include/stdlib.h \
+ U:/usr/include/malloc.h e:/usr/include/openssl/safestack.h \
+ e:/usr/include/openssl/stack.h e:/usr/include/openssl/ossl_typ.h \
+ U:/usr/include/limits.h U:/usr/include/sys/limits.h \
+ U:/usr/include/sys/syslimits.h e:/usr/include/openssl/cryptoerr.h \
+ e:/usr/include/openssl/symhacks.h e:/usr/include/pthread.h \
+ U:/usr/include/errno.h U:/usr/include/sys/errno.h \
+ U:/usr/include/signal.h U:/usr/include/sys/signal.h \
+ U:/usr/include/machine/signal.h U:/usr/include/386/signal.h \
+ U:/usr/include/machine/trap.h U:/usr/include/386/trap.h \
+ U:/usr/include/sys/param.h U:/usr/include/types.h \
+ U:/usr/include/machine/ansi.h U:/usr/include/386/ansi.h \
+ U:/usr/include/machine/param.h U:/usr/include/386/param.h \
+ U:/usr/include/machine/limits.h e:/usr/include/openssl/comperr.h \
+ e:/usr/include/openssl/bio.h U:/usr/include/stdarg.h \
+ U:/usr/include/machine/stdarg.h U:/usr/include/386/stdarg.h \
+ e:/usr/include/openssl/bioerr.h e:/usr/include/openssl/x509.h \
+ e:/usr/include/openssl/buffer.h e:/usr/include/openssl/buffererr.h \
+ U:/usr/include/stddef.h e:/usr/include/openssl/evp.h \
+ e:/usr/include/openssl/evperr.h e:/usr/include/openssl/objects.h \
+ e:/usr/include/openssl/obj_mac.h e:/usr/include/openssl/asn1.h \
+ e:/usr/include/openssl/asn1err.h e:/usr/include/openssl/bn.h \
+ e:/usr/include/openssl/bnerr.h e:/usr/include/openssl/objectserr.h \
+ e:/usr/include/openssl/ec.h e:/usr/include/openssl/ecerr.h \
+ e:/usr/include/openssl/rsa.h e:/usr/include/openssl/rsaerr.h \
+ e:/usr/include/openssl/dsa.h e:/usr/include/openssl/dh.h \
+ e:/usr/include/openssl/dherr.h e:/usr/include/openssl/dsaerr.h \
+ e:/usr/include/openssl/sha.h e:/usr/include/openssl/x509err.h \
+ e:/usr/include/openssl/x509_vfy.h e:/usr/include/openssl/lhash.h \
+ e:/usr/include/openssl/pkcs7.h e:/usr/include/openssl/pkcs7err.h \
+ e:/usr/include/openssl/pem.h e:/usr/include/openssl/pemerr.h \
+ e:/usr/include/openssl/hmac.h e:/usr/include/openssl/async.h \
+ e:/usr/include/openssl/asyncerr.h e:/usr/include/openssl/ct.h \
+ e:/usr/include/openssl/cterr.h e:/usr/include/openssl/sslerr.h \
+ e:/usr/include/openssl/ssl2.h e:/usr/include/openssl/ssl3.h \
+ e:/usr/include/openssl/tls1.h e:/usr/include/openssl/dtls1.h \
+ e:/usr/include/openssl/srtp.h e:/usr/include/openssl/err.h \
+ ../clamav-types.h ../clamav-version.h ../libclamav/str.h \
+ ../libclamav/clamav.h ../libclamav/cvd.h e:/usr/include/zlib.h \
+ e:/usr/include/zconf.h ../libclamav/default.h ../libclamav/dsig.h \
+ ../libclamav/others.h ../libclamav/matcher.h ../libclamav/filetypes.h \
+ ../libclamav/fmap.h \
+ U:/usr/local1220/lib/gcc/i686-pc-os2-emx/12.2.0/include/stdbool.h \
+ ../libclamav/others.h ../libclamav/dconf.h ../libclamav/cvd.h \
+ ../libclamav/mpool.h ../libclamav/readdb.h ../libclamav/str.h \
+ ../libclamav/regex/regex.h ../libclamav/bytecode.h ../libclamav/clambc.h \
+ ../libclamav/bytecode_detect.h ../platform.h ../libclamav/bytecode_api.h \
+ ../libclamav/events.h ../libclamav/crtmgr.h ../libclamav/bignum.h \
+ ../libclamav/bignum_fast.h ../libclamunrar_iface/unrar_iface.h \
+ U:/usr/include/stdint.h ../libclamav/yara_clam.h ../libclamav/queue.h \
+ ../libclamav/yara_hash.h ../libclamav/execs.h ../libclamav/hashtab.h \
+ ../libclamav/bcfeatures.h ../libclamav/pe_structs.h \
+ ../libclamav/matcher-ac.h ../libclamav/matcher-bm.h \
+ ../libclamav/matcher-hash.h ../libclamav/matcher-pcre.h \
+ ../libclamav/regex_pcre.h /extras/include/pcre2.h \
+ ../libclamav/matcher-byte-comp.h misc.h U:/usr/include/netdb.h \
+ U:/usr/include/libcx/net.h U:/usr/include/sys/socket.h \
+ U:/usr/include/sys/uio.h U:/usr/include/sys/_sockaddr_storage.h \
+ U:/usr/include/sys/ioccom.h U:/usr/include/net/if.h \
+ U:/usr/include/net/if_arp.h U:/usr/include/netinet/in.h optparser.h \
+ output.h cdiff.h
+../clamav-config.h:
+../platform.h:
+U:/usr/include/stdio.h:
+U:/usr/include/sys/cdefs.h:
+U:/usr/include/sys/gnu/cdefs.h:
+U:/usr/include/features.h:
+U:/usr/include/sys/_types.h:
+U:/usr/include/machine/_types.h:
+U:/usr/include/386/_types.h:
+U:/usr/include/string.h:
+U:/usr/include/strings.h:
+U:/usr/include/ctype.h:
+U:/usr/include/_ctype.h:
+U:/usr/include/sys/types.h:
+U:/usr/include/machine/endian.h:
+U:/usr/include/386/endian.h:
+U:/usr/include/sys/select.h:
+U:/usr/include/sys/_sigset.h:
+U:/usr/include/sys/stat.h:
+U:/usr/include/sys/time.h:
+U:/usr/include/sys/_timeval.h:
+U:/usr/include/sys/timespec.h:
+U:/usr/include/time.h:
+U:/usr/include/unistd.h:
+U:/usr/include/sys/unistd.h:
+U:/usr/include/sys/_null.h:
+../libclamav/clamav.h:
+e:/usr/include/openssl/ssl.h:
+e:/usr/include/openssl/e_os2.h:
+e:/usr/include/openssl/opensslconf.h:
+e:/usr/include/openssl/opensslv.h:
+U:/usr/include/inttypes.h:
+U:/usr/include/machine/_inttypes.h:
+U:/usr/include/386/_inttypes.h:
+U:/usr/include/sys/stdint.h:
+U:/usr/include/machine/_stdint.h:
+U:/usr/include/386/_stdint.h:
+U:/usr/include/machine/_limits.h:
+U:/usr/include/386/_limits.h:
+e:/usr/include/openssl/comp.h:
+e:/usr/include/openssl/crypto.h:
+U:/usr/include/stdlib.h:
+U:/usr/include/malloc.h:
+e:/usr/include/openssl/safestack.h:
+e:/usr/include/openssl/stack.h:
+e:/usr/include/openssl/ossl_typ.h:
+U:/usr/include/limits.h:
+U:/usr/include/sys/limits.h:
+U:/usr/include/sys/syslimits.h:
+e:/usr/include/openssl/cryptoerr.h:
+e:/usr/include/openssl/symhacks.h:
+e:/usr/include/pthread.h:
+U:/usr/include/errno.h:
+U:/usr/include/sys/errno.h:
+U:/usr/include/signal.h:
+U:/usr/include/sys/signal.h:
+U:/usr/include/machine/signal.h:
+U:/usr/include/386/signal.h:
+U:/usr/include/machine/trap.h:
+U:/usr/include/386/trap.h:
+U:/usr/include/sys/param.h:
+U:/usr/include/types.h:
+U:/usr/include/machine/ansi.h:
+U:/usr/include/386/ansi.h:
+U:/usr/include/machine/param.h:
+U:/usr/include/386/param.h:
+U:/usr/include/machine/limits.h:
+e:/usr/include/openssl/comperr.h:
+e:/usr/include/openssl/bio.h:
+U:/usr/include/stdarg.h:
+U:/usr/include/machine/stdarg.h:
+U:/usr/include/386/stdarg.h:
+e:/usr/include/openssl/bioerr.h:
+e:/usr/include/openssl/x509.h:
+e:/usr/include/openssl/buffer.h:
+e:/usr/include/openssl/buffererr.h:
+U:/usr/include/stddef.h:
+e:/usr/include/openssl/evp.h:
+e:/usr/include/openssl/evperr.h:
+e:/usr/include/openssl/objects.h:
+e:/usr/include/openssl/obj_mac.h:
+e:/usr/include/openssl/asn1.h:
+e:/usr/include/openssl/asn1err.h:
+e:/usr/include/openssl/bn.h:
+e:/usr/include/openssl/bnerr.h:
+e:/usr/include/openssl/objectserr.h:
+e:/usr/include/openssl/ec.h:
+e:/usr/include/openssl/ecerr.h:
+e:/usr/include/openssl/rsa.h:
+e:/usr/include/openssl/rsaerr.h:
+e:/usr/include/openssl/dsa.h:
+e:/usr/include/openssl/dh.h:
+e:/usr/include/openssl/dherr.h:
+e:/usr/include/openssl/dsaerr.h:
+e:/usr/include/openssl/sha.h:
+e:/usr/include/openssl/x509err.h:
+e:/usr/include/openssl/x509_vfy.h:
+e:/usr/include/openssl/lhash.h:
+e:/usr/include/openssl/pkcs7.h:
+e:/usr/include/openssl/pkcs7err.h:
+e:/usr/include/openssl/pem.h:
+e:/usr/include/openssl/pemerr.h:
+e:/usr/include/openssl/hmac.h:
+e:/usr/include/openssl/async.h:
+e:/usr/include/openssl/asyncerr.h:
+e:/usr/include/openssl/ct.h:
+e:/usr/include/openssl/cterr.h:
+e:/usr/include/openssl/sslerr.h:
+e:/usr/include/openssl/ssl2.h:
+e:/usr/include/openssl/ssl3.h:
+e:/usr/include/openssl/tls1.h:
+e:/usr/include/openssl/dtls1.h:
+e:/usr/include/openssl/srtp.h:
+e:/usr/include/openssl/err.h:
+../clamav-types.h:
+../clamav-version.h:
+../libclamav/str.h:
+../libclamav/clamav.h:
+../libclamav/cvd.h:
+e:/usr/include/zlib.h:
+e:/usr/include/zconf.h:
+../libclamav/default.h:
+../libclamav/dsig.h:
+../libclamav/others.h:
+../libclamav/matcher.h:
+../libclamav/filetypes.h:
+../libclamav/fmap.h:
+U:/usr/local1220/lib/gcc/i686-pc-os2-emx/12.2.0/include/stdbool.h:
+../libclamav/others.h:
+../libclamav/dconf.h:
+../libclamav/cvd.h:
+../libclamav/mpool.h:
+../libclamav/readdb.h:
+../libclamav/str.h:
+../libclamav/regex/regex.h:
+../libclamav/bytecode.h:
+../libclamav/clambc.h:
+../libclamav/bytecode_detect.h:
+../platform.h:
+../libclamav/bytecode_api.h:
+../libclamav/events.h:
+../libclamav/crtmgr.h:
+../libclamav/bignum.h:
+../libclamav/bignum_fast.h:
+../libclamunrar_iface/unrar_iface.h:
+U:/usr/include/stdint.h:
+../libclamav/yara_clam.h:
+../libclamav/queue.h:
+../libclamav/yara_hash.h:
+../libclamav/execs.h:
+../libclamav/hashtab.h:
+../libclamav/bcfeatures.h:
+../libclamav/pe_structs.h:
+../libclamav/matcher-ac.h:
+../libclamav/matcher-bm.h:
+../libclamav/matcher-hash.h:
+../libclamav/matcher-pcre.h:
+../libclamav/regex_pcre.h:
+/extras/include/pcre2.h:
+../libclamav/matcher-byte-comp.h:
+misc.h:
+U:/usr/include/netdb.h:
+U:/usr/include/libcx/net.h:
+U:/usr/include/sys/socket.h:
+U:/usr/include/sys/uio.h:
+U:/usr/include/sys/_sockaddr_storage.h:
+U:/usr/include/sys/ioccom.h:
+U:/usr/include/net/if.h:
+U:/usr/include/net/if_arp.h:
+U:/usr/include/netinet/in.h:
+optparser.h:
+output.h:
+cdiff.h:
