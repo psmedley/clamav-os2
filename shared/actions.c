@@ -299,7 +299,7 @@ static int traverse_to(const char *directory, bool want_directory_handle, HANDLE
         goto done;
     }
 
-#ifndef _WIN32
+#if !defined(_WIN32) && !defined(__OS2__)
     /*
      * Open the root(/) directory, because it won't be the first token like a
      * drive letter (i.e. "C:") would be on Windows.
@@ -541,13 +541,18 @@ static int traverse_unlink(const char *target)
     FILE_DISPOSITION_INFO fileInfo = {0};
     HANDLE target_file_handle      = NULL;
 #endif
+#ifdef __OS2__
+    /* openat and friends aren't mature on OS/2, and we don't need to worry so  much about symlinks */
+    unlink(target);
+    status=0;
+    goto done;
+#endif
     char *target_basename = NULL;
 
     if (NULL == target) {
         logg("traverse_unlink: Invalid arguments!\n");
         goto done;
     }
-
 #ifndef _WIN32
     /* On posix, we want a file descriptor for the directory */
     if (0 != traverse_to(target, true, &target_directory_fd)) {
@@ -621,7 +626,7 @@ static void action_move(const char *filename)
 
     fd = getdest(filename, &nuname);
 
-#ifndef _WIN32
+#if !defined(_WIN32) && !defined(__OS2__)
     if (fd < 0 || (0 != traverse_rename(filename, nuname) && ((copied = 1)) && filecopy(filename, nuname))) {
 #else
     if (fd < 0 || (((copied = 1)) && filecopy(filename, nuname))) {
